@@ -30,11 +30,12 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+  counter1 uses closure to add to the count variable internally, while counter2 adds to an external variable.
   2. Which of the two uses a closure? How can you tell?
-  
+  counter 1 uses closure, because it uses a function inside of a funtion to change a variable set and remembered inside the function
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+     counter2 would be good if you wanted to have multiple things contribute to the count, because the variable is accessable outside the function.
 */
 
 // counter1 code
@@ -64,8 +65,8 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  return Math.floor(Math.random() * Math.floor(3));
 }
 
 
@@ -83,10 +84,19 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(inningCB, innings){
+  let homeScore = 0;
+  let awayScore = 0;
+  for(let i = 0; i < innings; i++){
+    let homeScore = homeScore + inningCB();
+    let awayScore = awayScore + inningCB();
+  }
+  return {
+    Home: homeScore,
+    Away: awayScore
+  }
 }
-
+finalScore(inning, 9);
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -101,8 +111,14 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningCB) {
+  let homeScore = inningCB();
+  let awayScore = inningCB();
+  return {
+    Home: homeScore,
+    Away: awayScore
+  }
+
 
 }
 
